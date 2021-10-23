@@ -14,6 +14,6 @@ text(b, max(k2b + 3), labels = k2b)
 
 M=rbind(k1b,k2b)
 
-b = barplot(M,col=c(2,3),las=1,ylim=c(0,30), main="wykres 3", beside=T, space=c(0.2,1))
+b = barplot(M,col=c(2,3),las=1,ylim=c(0,30), main="wykres 3", beside=T, space=c(0.2,1), names.arg = c(1:6))
 str(M)
-text(b, M, labels = M)
+text(b, M + 2, labels = M)
