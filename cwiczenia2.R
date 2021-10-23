@@ -167,4 +167,75 @@ ctg <- function(n,m){
 
 vec = ctg(300,100)
 vec
-hist(vec, breaks = 15, freq = F, las = 1 , ylim=c(0,0.2))
+hist(vec, breaks = 15, freq = F, las = 1 , ylim=c(0,0.2), xlim=c(30,70))
+# tutaj wartosc oczekiwana E = 100 * 1/2 = 50
+# tutaj wariancja to 100 * 1/2 
+arg = seq(30,70,0.1)
+m = 50
+d_kwadrat = sqrt(100/12)
+wartosci = dnorm(arg, m, d_kwadrat)
+lines(arg,wartosci,col=2, lwd=2)
+#
+#
+#
+#
+#
+#cwiczenie 5 - ciag Fibonacciego
+fib <- function(n){
+  u = numeric()
+  u[1] = 1
+  u[2] = 1
+  for(i in c(3:n)){
+    u[i] = u[i-1] + u[i-2]
+  }
+  return (u)
+}
+
+cyfra <- function(x,n){
+  y = as.character(abs(x))
+  d = substr(y,n,n)
+  d2 = as.numeric(d)
+  return (d2)
+}
+
+v1 = fib(100)
+v1
+v2 = cyfra(v1, 1)
+v2
+v3 = table(v2)
+v3
+barplot(v3, las=1, col=2)
+#
+#
+#
+#
+#
+#cwiczenie 6 - modulo
+modulo <- function(x,n){
+  u=numeric()
+  u[1] = x
+  for(i in c(2:n)){
+    u[i] = (3*u[i-1]) %% 1
+  }
+  return (u)
+}
+ v1 = modulo(0.1,300)
+ v1
+ hist(v1, freq=F, ylim=c(0,1.5))
+ plot(c(1:300), v1,type="l")
+ #
+ #
+ #
+ #
+ #
+ #
+ #cwiczenie 6 - test chi kwadrat dla rzutu kostka
+ wyniki=c(4,6,9,5,11,4,3,4,6,7,9,6)
+ wyniki
+ names(wyniki)=c(1:12)
+ wyniki
+ 
+ barplot(wyniki, ylim=c(0,15), las=1, col = 2)
+ abline(h=74/12, col=2)
+ chisq.test(wyniki) #jezeli p-value > 5% to nie ma podstaw do odrzucenia hipotezy zero,
+ #czyli wyniki MOGA byc uzyskane kostka uczcciwa, czyli JESZCZE nie ma podstaw do odrzucenia hipotezy
