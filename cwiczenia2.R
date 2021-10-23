@@ -64,13 +64,41 @@ lotto <- function(kupon, n){
 
 
 kupon=c(1,2,5,10,15)
-liczbaLosowan = 1000
+liczbaLosowan = 10
 lottoLosowe <- lottoLosowe(liczbaLosowan)
 lottoZKuponem <- lotto(kupon, liczbaLosowan)
 M=rbind(lottoLosowe, lottoZKuponem)
 M
 
 wykres = barplot(M/100,col=c(2,3),las=1,ylim=c(0,1), names = c(0:5),
-                 beside=T, space=c(0.5,2))
+                 beside=T, space=c(0.5,2), main = paste("Ilosc losowan = ", liczbaLosowan))
 
-text(wykres, 0.5, M)
+text(wykres, M/100 + 0.08, M)
+
+#cwiczenie 2 prawo wielkich liczb
+cummean <- function(v){
+  l = length(v)
+  u=cumsum(v)
+  for( i in c(1:l)){
+    u[i] = u[i]/i
+  }
+  return (u)
+}
+
+pwl <- function(n,m){ #n-liczba trajektori, m-ile liczb losujemy
+  liczbyLosowe = runif(m,0,1)
+  plot(c(1:m), cummean(liczbyLosowe), type = "l", ylim=c(0,1), las=1, cex.axis=0.75)
+  if(n>1){
+    for(i in c(2:n)){
+      liczbyLosowe = runif(m,0,1)
+      lines(c(1:m), cummean(liczbyLosowe), type = "l")
+    }
+  }
+}
+
+
+v = c(1,2,3,0,0,0)
+cummean(v)
+
+pwl(100, 1000)
+abline(h=0.5, col=2)
